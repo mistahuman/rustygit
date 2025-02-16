@@ -1,0 +1,22 @@
+[package]
+name = "git-rustystats"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+clap = { version = "4.5.29", features = ["derive"] }
+git2 = "0.20.0"
+colored = "3.0.0"
+prettytable = "0.10.0"
+
+
+[package.metadata.deb]
+maintainer = "mistahuman <marko_lan@hotmail.it> "
+copyright = "2025, mistahuman <marko_lan@hotmail.it> "
+extended-description = """A simple hello world program!"""
+depends = "$auto"
+section = "utility"
+priority = "optional"
+assets = [
+ ["target/release/git-rustystats", "usr/bin/", "755"],
+]
