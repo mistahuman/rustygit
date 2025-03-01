@@ -167,8 +167,7 @@ fn get_commit_from_tag(repo: &Repository, tag_name: &str) -> Option<Oid> {
 
 /// Generate a changelog between two tags
 fn generate_changelog(repo: &Repository, from_tag: &str, to_tag: &str, output: &Option<String>) {
-    println!("Generating changelog from '{}' to '{}'...", from_tag.green(), to_tag.green());
-    
+    let title: String = format!("Changelog from {} to {}", from_tag, to_tag);
     // Check if tags exist
     if !tag_exists(repo, from_tag) {
         println!("{}", format!("❌ Tag '{}' does not exist!", from_tag).red());
@@ -197,6 +196,7 @@ fn generate_changelog(repo: &Repository, from_tag: &str, to_tag: &str, output: &
         }
     };
     
+    println!("Generating changelog from '{}' to '{}'...", from_tag.green(), to_tag.green());
     // Get commits between the tags
     let mut commits = Vec::new();
     let mut revwalk = repo.revwalk().expect("Failed to create revwalk");
@@ -234,7 +234,7 @@ fn generate_changelog(repo: &Repository, from_tag: &str, to_tag: &str, output: &
     let deletions = stats.deletions();
     
     // Format the changelog
-    let changelog = format_changelog(&commits, files_changed, insertions, deletions);
+    let changelog = format_changelog(title, &commits, files_changed, insertions, deletions);
     
     // Save to file or print to screen
     match output {
@@ -263,11 +263,11 @@ fn format_time(time: &git2::Time) -> String {
 }
 
 /// Format the changelog into a readable string
-fn format_changelog(commits: &[CommitInfo], files_changed: usize, insertions: usize, deletions: usize) -> String {
+fn format_changelog(title: String,commits: &[CommitInfo], files_changed: usize, insertions: usize, deletions: usize) -> String {
     let mut result = String::new();
     
     // Add header
-    result.push_str("# Changelog\n\n");
+    result.push_str(format!("# {}\n\n", title).as_str());
     
     // Add statistics section
     result.push_str("## Statistics\n\n");

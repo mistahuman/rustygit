@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug Rust",
+            "program": "${workspaceFolder}/target/debug/git-rustystats",
+            // "args": ["changelog", "--help"],	
+            "args": ["changelog", "--from-tag", "0.0.1", "--to-tag", "0.0.2", "--output", "changelog.md"],	
+            "cwd": "${workspaceFolder}",
+            "terminal": "integrated",
+            "sourceLanguages": ["rust"]
+        }
+    ]
+}
