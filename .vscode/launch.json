@@ -6,8 +6,9 @@
             "request": "launch",
             "name": "Debug Rust",
             "program": "${workspaceFolder}/target/debug/git-rustystats",
+            // "args": ["-h"],	
             // "args": ["changelog", "--help"],	
-            "args": ["changelog", "--from-tag", "0.0.1", "--to-tag", "0.0.2", "--output", "changelog.md"],	
+            "args": ["-p", "../../work/matriskills/be/","changelog", "--from-tag", "1.0.1", "--to-tag", "1.0.2", "--output", "changelog.md"],	
             "cwd": "${workspaceFolder}",
             "terminal": "integrated",
             "sourceLanguages": ["rust"]
