@@ -1,5 +1,5 @@
 [package]
-name = "git-rustystats"
+name = "rustygit"
 version = "1.0.0"
 edition = "2021"
 
@@ -19,5 +19,5 @@ depends = "$auto"
 section = "utility"
 priority = "optional"
 assets = [
- ["target/release/git-rustystats", "usr/bin/", "755"],
+ ["target/release/rustygit", "usr/bin/", "755"],
 ]
