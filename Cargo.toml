@@ -8,6 +8,7 @@ clap = { version = "4.5.29", features = ["derive"] }
 git2 = "0.20.0"
 colored = "3.0.0"
 prettytable = "0.10.0"
+chrono = "0.4.40"
 
 
 [package.metadata.deb]

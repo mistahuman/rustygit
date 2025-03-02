@@ -8,7 +8,7 @@
             "program": "${workspaceFolder}/target/debug/git-rustystats",
             // "args": ["-h"],	
             // "args": ["changelog", "--help"],	
-            "args": ["-p", ".","changelog", "--from-tag", "0.0.1", "--to-tag", "1.0.0-test", "--output", "changelog.md"],	
+            "args": ["-p", ".","changelog", "--from-tag", "0.0.1", "--to-tag", "1.0.0-test1", "--output", "changelog.md"],	
             "cwd": "${workspaceFolder}",
             "terminal": "integrated",
             "sourceLanguages": ["rust"]

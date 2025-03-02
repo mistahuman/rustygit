@@ -3,7 +3,7 @@ use colored::*;
 use git2::{Repository, DiffOptions};
 use crate::models::CommitInfo;
 use crate::repo::{tag_exists, get_commit_from_tag};
-use crate::utils::format_time;
+use crate::utils::{format_time, format_timestamp};
 
 
 /// Generate a changelog between two tags
@@ -112,8 +112,8 @@ pub fn format_changelog(title: String,commits: &[CommitInfo], files_changed: usi
     let mut others = Vec::new();
     
     for commit in commits {
-        let msg = &commit.message;
-        if msg.starts_with("Merged PR") || msg.starts_with("feature") || msg.starts_with("task") {
+        let msg = &commit.message.to_lowercase();
+        if msg.starts_with("merged") || msg.starts_with("feature") || msg.starts_with("task") {
             features.push(commit);
         } else if msg.starts_with("fix") || msg.starts_with("bug") {
             fixes.push(commit);
@@ -130,7 +130,7 @@ pub fn format_changelog(title: String,commits: &[CommitInfo], files_changed: usi
                 commit.message.lines().next().unwrap_or(""),
                 &commit.hash[..7],
                 commit.author,
-                commit.date
+                format_timestamp(commit.date.parse::<i64>().unwrap_or(0))
             ));
         }
         result.push('\n');
@@ -143,7 +143,8 @@ pub fn format_changelog(title: String,commits: &[CommitInfo], files_changed: usi
                 commit.message.lines().next().unwrap_or(""),
                 &commit.hash[..7],
                 commit.author,
-                commit.date
+                format_timestamp(commit.date.parse::<i64>().unwrap_or(0))
+
             ));
         }
         result.push('\n');
@@ -156,7 +157,8 @@ pub fn format_changelog(title: String,commits: &[CommitInfo], files_changed: usi
                 commit.message.lines().next().unwrap_or(""),
                 &commit.hash[..7],
                 commit.author,
-                commit.date
+                format_timestamp(commit.date.parse::<i64>().unwrap_or(0))
+
             ));
         }
     }
