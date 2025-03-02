@@ -1,6 +1,6 @@
 [package]
 name = "git-rustystats"
-version = "0.1.0"
+version = "1.0.0"
 edition = "2021"
 
 [dependencies]
@@ -13,7 +13,7 @@ prettytable = "0.10.0"
 [package.metadata.deb]
 maintainer = "mistahuman <marko_lan@hotmail.it> "
 copyright = "2025, mistahuman <marko_lan@hotmail.it> "
-extended-description = """A simple hello world program!"""
+extended-description = """A simple git analyzer. Fast changelog generator!"""
 depends = "$auto"
 section = "utility"
 priority = "optional"
