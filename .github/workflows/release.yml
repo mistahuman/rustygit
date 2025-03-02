@@ -3,8 +3,8 @@ name: Release Debian Package
 on:
   push:
     branches:
-      - main  # Esegui quando pushi su main
-  workflow_dispatch: # Permette di avviare manualmente il workflow
+      - main 
+  workflow_dispatch: 
 
 jobs:
   build:
@@ -33,8 +33,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # Necessario per creare rilasci
-
+      contents: write  
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v4
@@ -45,7 +44,7 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v1.0.${{ github.run_number }}  # Genera un numero progressivo
+          tag_name: v1.0.${{ github.run_number }}  
           name: "Release v1.0.${{ github.run_number }}"
           draft: false
           prerelease: false
