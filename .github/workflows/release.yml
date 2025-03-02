@@ -1,0 +1,54 @@
+name: Release Debian Package
+
+on:
+  push:
+    branches:
+      - main  # Esegui quando pushi su main
+  workflow_dispatch: # Permette di avviare manualmente il workflow
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install cargo-deb
+        run: cargo install cargo-deb
+
+      - name: Build Debian package
+        run: cargo deb
+
+      - name: Upload .deb as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: debian-package
+          path: target/debian/*.deb
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Necessario per creare rilasci
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: debian-package
+          path: deb-release
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0.${{ github.run_number }}  # Genera un numero progressivo
+          name: "Release v1.0.${{ github.run_number }}"
+          draft: false
+          prerelease: false
+          files: deb-release/*.deb
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
