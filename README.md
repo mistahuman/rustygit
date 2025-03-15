@@ -1,5 +1,5 @@
 # rustygit
-A simple git stats tool for improving Rust
+A simple Git stats tool to improve my Rust skills
 
 ## Introduction
 This project provides a simple tool to gather and display statistics from a git repository. It is designed to help you learn Rust by working on a practical project.
